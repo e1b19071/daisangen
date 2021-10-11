@@ -8,6 +8,39 @@
 
 <body>
   <h1>がんばれ同期ちゃん アニメ化おめでとう!!</h1>
+  <script th:inline="javascript" th:if=${score}>
+    window.onload = function () {
+      //score変数の内容を読み取る
+      var score = [[${ score }]];
+      //3つの数値を文字列として保持する変数
+      var num_list_txt = "";
+      for (let i = 0; i < 3; i++) {
+        num_list_txt = num_list_txt + score.numList[i] + ",";
+      }
+      num_list_txt = num_list_txt + "<br>平均は" + score.ave;
+      document.getElementById("num_list").innerHTML = num_list_txt;
+      console.log(score);//ログ出力．ブラウザのコンソール画面に表示される
+    }
+  </script>
+
+  <p>
+    数字を2つ入れてみよう
+  <form action="/sample26" method="post">
+    最小値：<input type="number" name="min" />
+    最大値：<input type="number" name="max" />
+    <input type="submit" value="計算"><input type="reset" value="リセット">
+  </form>
+
+  <div>
+    以下の数字をすべて加算すると(Thymeleafのfor-each)<br>
+    <span th:each="num:${sumRange}">
+      [[${num}]]
+    </span>
+    <div>
+      [[${sum}]]
+    </div>
+  </div>
+  </p>
 </body>
 
 </html>
